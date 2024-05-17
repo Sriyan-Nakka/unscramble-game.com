@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Unscramble Game</title>
+  </head>
+  <style>
+    @font-face {
+      font-family: "heading";
+      src: url("https://res.cloudinary.com/dxcywxeqq/raw/upload/v1698908854/Agbalumo-Regular_gh45xm.ttf");
+    }
+
+    @font-face {
+      font-family: "body-font";
+      src: url("https://res.cloudinary.com/dxcywxeqq/raw/upload/v1699777067/WorkSans-SemiBold_wa0zgb.ttf");
+    }
+    input#guessedWord {
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      padding: 5px;
+    }
+    #wordContainer,
+    #correct,
+    #wrong,
+    #win {
+      display: none;
+      text-align: left;
+    }
+    #body {
+      font-size: 140%;
+      background-color: rgb(81, 160, 230);
+      text-align: center;
+      font-family: "body-font", sans-serif;
+    }
+    button,
+    input {
+      font-size: 105%;
+    }
+    #next,
+    #next2,
+    footer,
+    #howToPlay,
+    #scrambledWord,
+    input {
+      text-align: center;
+    }
+    #heading {
+      text-decoration: underline;
+      text-align: center;
+      font-family: "heading", sans-serif;
+      font-size: 125%;
+      font-weight: bolder;
+      color: #e02727;
+    }
+    footer {
+      color: rgb(255, 6, 255);
+    }
+    button {
+      background-color: green;
+      color: aliceblue;
+    }
+    button:hover {
+      cursor: pointer;
+      background-color: greenyellow;
+      color: black;
+    }
+    #heading1 {
+      font-weight: bold;
+      font-style: italic;
+      font-size: 115%;
+      text-align: center;
+      font-family: "heading", sans-serif;
+      color: green;
+    }
+    .gameContainer {
+      background-color: whitesmoke;
+    }
+    button {
+      text-align: center;
+    }
+  </style>
+  <body id="body">
+    <div class="gameContainer">
+      <header>
+        <h3 id="heading">Word Unscramble Game</h3>
+      </header>
+      <details id="howToPlay">
+        <summary>How to Play</summary>
+        <br />
+        There are going to be 3 words each time you hit the play button. <br />
+        Those 3 words are scrambled. You have to unscramble them and if you
+        unscramble all of them, you win! Good Luck.
+      </details>
+
+      <p id="wordContainer">
+        Unscramble the following word(submit your answer in small letters):
+        <br />
+        <br />
+        <span id="scrambledWord"></span> <br />
+        <br />
+        <input type="text" id="guessedWord" /> <br />
+        <br /><input type="submit" id="submit" value="Check" />
+        <button id="next" style="display: none">Next</button>
+        <button id="next2" style="display: none">Next</button>
+      </p>
+      <div id="correct">You are correct!</div>
+      <div id="wrong">You are wrong. Try again.</div>
+      <div id="win">
+        <h1 id="heading1">You Win!</h1>
+        <br />
+        <button id="playAgain">Play Again</button>
+      </div>
+      <br />
+      <button id="playGame">Play</button>
+      <br />
+      <br />
+      <footer>
+        &copy; Sai Sriyan Nakka, <br />
+        Version 1.8
+      </footer>
+    </div>
+  </body>
+</html>
+<script>
+  let playGame = document.getElementById("playGame");
+  let wordContainer = document.getElementById("wordContainer");
+  let scrambledWord = document.getElementById("scrambledWord");
+  const submit = document.getElementById("submit");
+  let correct = document.getElementById("correct");
+  let wrong = document.getElementById("wrong");
+  let body = document.getElementById("body");
+
+  let win = document.getElementById("win");
+  //unscrambled words
+  let unscrambledr1n1 = "money";
+  let unscrambledr1n2 = "honey";
+  let unscrambledr1n3 = "bunny";
+
+  let unscrambledr2n1 = "funny";
+  let unscrambledr2n2 = "cunning";
+  let unscrambledr2n3 = "dummy";
+
+  let unscrambledr3n1 = "mummy";
+  let unscrambledr3n2 = "daddy";
+  let unscrambledr3n3 = "loving";
+  //TODO: SCRAMBLED WORDS
+  let scrambledr1n1 = "emnoy";
+  let scrambledr1n2 = "neohy";
+  let scrambledr1n3 = "bnynu";
+
+  let scrambledr2n1 = "unfny";
+  let scrambledr2n2 = "gnnnuci";
+  let scrambledr2n3 = "mudmy";
+
+  let scrambledr3n1 = "mymum";
+  let scrambledr3n2 = "ddyda";
+  let scrambledr3n3 = "gniovl";
+
+  let playAgain = document.getElementById("playAgain");
+
+  function gamePlay() {
+    let randNum = Math.floor(Math.random() * 3) + 1;
+    console.log(randNum);
+    playGame.onclick = function () {
+      wordContainer.style.display = "block";
+      let howToPlay = document.getElementById("howToPlay");
+      howToPlay.style.display = "none";
+      switch (randNum) {
+        case 1:
+          playGame.style.display = "none";
+          scrambledWord.textContent = scrambledr1n1;
+          submit.onclick = function () {
+            let guessedWord = document.getElementById("guessedWord").value;
+            if (guessedWord === unscrambledr1n1) {
+              correct.style.display = "block";
+              setTimeout(function () {
+                body.style.textAlign = "center";
+                correct.style.display = "none";
+                next.style.display = "block";
+                next.style.textAlign = "center";
+                submit.style.display = "none";
+              }, 1500);
+            } else {
+              wrong.style.display = "block";
+              setTimeout(function () {
+                wrong.style.display = "none";
+              }, 1500);
+            }
+          };
+          //section 2
+          next.onclick = function () {
+            body.style.textAlign = "center";
+            body.style.textAlign = "center";
+            submit.style.display = "block";
+            next.style.display = "none";
+            guessedWord.value = "";
+            scrambledWord.textContent = scrambledr1n2;
+            submit.onclick = function () {
+              guessedWord = document.getElementById("guessedWord").value;
+              if (guessedWord === unscrambledr1n2) {
+                correct.style.display = "block";
+                setTimeout(function () {
+                  correct.style.display = "none";
+                  submit.style.display = "none";
+                  next2.style.display = "block";
+                  next2.style.textAlign = "center";
+                }, 1500);
+              } else {
+                wrong.style.display = "block";
+                setTimeout(function () {
+                  wrong.style.display = "none";
+                }, 1500);
+              }
+            };
+          };
+          //section 3
+          next2.onclick = function () {
+            body.style.textAlign = "center";
+            next2.style.display = "none";
+            next.style.display = "none";
+            submit.style.display = "block";
+            const guessedWordInput = document.getElementById("guessedWord"); // Get the input element
+            guessedWordInput.value = "";
+            scrambledWord.textContent = scrambledr1n3;
+            submit.onclick = function () {
+              guessedWord = document.getElementById("guessedWord").value;
+              if (guessedWord === unscrambledr1n3) {
+                correct.style.display = "block";
+                setTimeout(function () {
+                  body.style.textAlign = "center";
+                  correct.style.display = "none";
+                  submit.style.display = "none";
+                  scrambledWord.style.display = "none";
+                  win.style.display = "block";
+                  wordContainer.style.display = "none";
+                }, 1500);
+              } else {
+                wrong.style.display = "block";
+                setTimeout(function () {
+                  wrong.style.display = "none";
+                }, 1500);
+              }
+            };
+          };
+          break;
+        case 2:
+          body.style.textAlign = "center";
+          playGame.style.display = "none";
+          scrambledWord.textContent = scrambledr2n1;
+          submit.onclick = function () {
+            let guessedWord = document.getElementById("guessedWord").value;
+            if (guessedWord === unscrambledr2n1) {
+              correct.style.display = "block";
+              setTimeout(function () {
+                body.style.textAlign = "center";
+                correct.style.display = "none";
+                next.style.display = "block";
+                next.style.textAlign = "center";
+                submit.style.display = "none";
+              }, 1500);
+            } else {
+              wrong.style.display = "block";
+              setTimeout(function () {
+                wrong.style.display = "none";
+              }, 1500);
+            }
+          };
+          //section 2
+          next.onclick = function () {
+            submit.style.display = "block";
+            next.style.display = "none";
+            body.style.textAlign = "center";
+            guessedWord.value = "";
+            scrambledWord.textContent = scrambledr2n2;
+            submit.onclick = function () {
+              guessedWord = document.getElementById("guessedWord").value;
+              if (guessedWord === unscrambledr2n2) {
+                correct.style.display = "block";
+                setTimeout(function () {
+                  body.style.textAlign = "center";
+                  correct.style.display = "none";
+                  submit.style.display = "none";
+                  next2.style.display = "block";
+                  next2.style.textAlign = "center";
+                }, 1500);
+              } else {
+                wrong.style.display = "block";
+                setTimeout(function () {
+                  wrong.style.display = "none";
+                }, 1500);
+              }
+            };
+          };
+          //section 3
+          next2.onclick = function () {
+            body.style.textAlign = "center";
+            next2.style.display = "none";
+            next.style.display = "none";
+            submit.style.display = "block";
+            const guessedWordInput = document.getElementById("guessedWord"); // Get the input element
+            guessedWordInput.value = "";
+            scrambledWord.textContent = scrambledr2n3;
+            submit.onclick = function () {
+              guessedWord = document.getElementById("guessedWord").value;
+              if (guessedWord === unscrambledr2n3) {
+                correct.style.display = "block";
+                setTimeout(function () {
+                  body.style.textAlign = "center";
+                  correct.style.display = "none";
+                  submit.style.display = "none";
+                  scrambledWord.style.display = "none";
+                  win.style.display = "block";
+                  wordContainer.style.display = "none";
+                }, 1500);
+              } else {
+                wrong.style.display = "block";
+                setTimeout(function () {
+                  wrong.style.display = "none";
+                }, 1500);
+              }
+            };
+          };
+          break;
+        case 3:
+          playGame.style.display = "none";
+          scrambledWord.textContent = scrambledr3n1;
+          submit.onclick = function () {
+            body.style.textAlign = "center";
+            let guessedWord = document.getElementById("guessedWord").value;
+            if (guessedWord === unscrambledr3n1) {
+              correct.style.display = "block";
+              setTimeout(function () {
+                body.style.textAlign = "center";
+                correct.style.display = "none";
+                next.style.display = "block";
+                next.style.textAlign = "center";
+                submit.style.display = "none";
+              }, 1500);
+            } else {
+              wrong.style.display = "block";
+              setTimeout(function () {
+                wrong.style.display = "none";
+              }, 1500);
+            }
+          };
+          //section 2
+          next.onclick = function () {
+            submit.style.display = "block";
+            body.style.textAlign = "center";
+            next.style.display = "none";
+            guessedWord.value = "";
+            scrambledWord.textContent = scrambledr3n2;
+            submit.onclick = function () {
+              guessedWord = document.getElementById("guessedWord").value;
+              if (guessedWord === unscrambledr3n2) {
+                correct.style.display = "block";
+                setTimeout(function () {
+                  correct.style.display = "none";
+                  submit.style.display = "none";
+                  next2.style.display = "block";
+                  next2.style.textAlign = "center";
+                }, 1500);
+              } else {
+                wrong.style.display = "block";
+                setTimeout(function () {
+                  wrong.style.display = "none";
+                }, 1500);
+              }
+            };
+          };
+          //section 3
+          next2.onclick = function () {
+            body.style.textAlign = "center";
+            next2.style.display = "none";
+            next.style.display = "none";
+            submit.style.display = "block";
+            const guessedWordInput = document.getElementById("guessedWord"); // Get the input element
+            guessedWordInput.value = "";
+            scrambledWord.textContent = scrambledr3n3;
+            submit.onclick = function () {
+              guessedWord = document.getElementById("guessedWord").value;
+              if (guessedWord === unscrambledr3n3) {
+                correct.style.display = "block";
+                body.style.textAlign = "center";
+                setTimeout(function () {
+                  body.style.textAlign = "center";
+                  correct.style.display = "none";
+                  submit.style.display = "none";
+                  scrambledWord.style.display = "none";
+                  win.style.display = "block";
+                  wordContainer.style.display = "none";
+                }, 1500);
+              } else {
+                wrong.style.display = "block";
+                setTimeout(function () {
+                  wrong.style.display = "none";
+                }, 1500);
+              }
+            };
+          };
+          break;
+        default:
+          scrambledWord.textContent =
+            "Hey! If you are reading this, it means there is an error in the game code. Please try again later.";
+      }
+    };
+  }
+  gamePlay();
+
+  playAgain.onclick = function () {
+    win.style.display = "none";
+    howToPlay.style.display = "block";
+    playGame.style.display = "block";
+  };
+</script>
